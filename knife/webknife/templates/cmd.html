@@ -1,0 +1,49 @@
+{% extends "knifebase.html" %}
+
+{% block addjs %}
+<script src="http://www.w3school.com.cn//jquery/jquery-1.11.1.min.js"></script>
+<script>
+$(document).ready(function(){
+      $("button").click(function(){
+          var parser = $("#inputString").val();
+          var local = document.location.href;
+          $.get(local+"?cmd="+parser,function(data,status){
+              var ret = data['command'];
+              var cmd = data['current_cmd'];
+              var string2 = "<tr><td>"+ cmd+ "--->" +ret +"</td></tr>";
+
+              if(data['FalseCode0']!="0") {
+                  $("#show").append(string2);
+              }else{
+                   $("#show").append("命令解析失败");
+              }
+          });
+      });
+    });
+</script>
+{% endblock%}
+{% block content %}
+<div class="container" style="padding: 50px;">
+<form class="bs-example bs-example-form" style="padding-left: 100px; padding-bottom: 20px" role="form">
+		<div class="row">
+			<div class="col-lg-10">
+				<div class="input-group">
+					<input type="text" id="inputString" class="form-control">
+					<span class="input-group-btn">
+						<button class="btn btn-success" type="button">Exec</button>
+					</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+	</form>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">CMD Parser</h3>
+        </div>
+        <table id="show" class="table">
+        </table>
+    </div>
+</div>
+{% endblock %}

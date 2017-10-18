@@ -1,0 +1,45 @@
+{% extends "knifebase.html" %}
+{% block addjs %}
+
+{% endblock %}
+{% block index %}active{% endblock %}
+{% block content%}
+
+<div style="margin-top: 50px;">
+<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>序号</th>
+		<th>网站</th>
+		<th>密码</th>
+		<th>IP</th>
+        <th>备注</th>
+		<th>创建时间</th>
+		<th>操作</th>
+	</tr>
+	</thead>
+	<tbody>
+    {% if alltasks %}
+        {% for task in alltasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.target }}</td>
+                <td><span class="label label-warning">{{ task.password }}</span></td>
+
+                <td><span class="label label-primary">{{ task.ip }}</span></td>
+                <td><span class="label label-info">{{ task.mark }}</span></td>
+                <td><span class="label label-success">{{ task.date }}</span></td>
+                <td>
+
+                    <a href="/knife/task/show/{{ task.id }}/"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    <a href="/knife/task/cmd/{{ task.id }}/"><span class="glyphicon glyphicon-list-alt"></span></a>
+                    <a href="/knife/task/del/{{ task.id }}/"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="/knife/edit/{{ task.id }}/"><span class="glyphicon glyphicon-edit"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+	</tbody>
+</table>
+</div>
+{% endblock %}

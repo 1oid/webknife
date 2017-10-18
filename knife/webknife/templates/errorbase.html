@@ -1,0 +1,11 @@
+{% extends "knifebase.html" %}
+
+{% block content %}
+<div style="margin-top: 50px;">
+    {% if errormsg %}
+        <div class="well well-lg">{{ errormsg }}</div>
+    {% else %}
+        <div class="well well-lg">错误测试</div>
+    {% endif %}
+</div>
+{% endblock %}

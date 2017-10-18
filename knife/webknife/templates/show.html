@@ -1,0 +1,31 @@
+{% extends "knifebase.html" %}
+
+{% block content %}
+{% if Absmsg %}
+<ol class="breadcrumb">
+    {% for root in Absmsg.rootall %}
+	    <li><a href="/knife/task/show/{{ taskid }}/?dir={{ root }}:">{{ root }}</a></li>
+    {% endfor %}
+</ol>
+
+
+<table class="table table-hover">
+	<caption>当前目录: {{ current_dir }}</caption>
+	<a href="/knife/task/fileadd/{{ taskid }}/?filepath={{ current_dir }}" class="btn btn-success">上传文件到当前目录</a>
+	<thead>
+		<tr>
+			<th>文件名</th>
+		</tr>
+	</thead>
+	<tbody>
+        {% for file in Showfiles %}
+		<tr class="{{ file.static }}">
+			    <td><a href="/knife/task/show/{{ taskid }}/?dir={{ current_dir }}/{{ file.filename }}">{{ file.filename }}</a></td>
+		</tr>
+     {% endfor %}
+
+	</tbody>
+</table>
+
+{% endif %}
+{% endblock %}
